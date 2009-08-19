@@ -29,8 +29,9 @@ module Delayed
 
     ParseObjectFromYaml = /\!ruby\/\w+\:([^\s]+)/
 
-    named_scope :unfinished, :conditions => { :finished_at => nil }
+    named_scope :unfinished, :conditions => { :finished_at => nil, :failed_at => nil }
     named_scope :finished,   :conditions => [ "finished_at IS NOT NULL" ]
+    named_scope :failed,     :conditions => [ "failed_at IS NOT NULL" ]
 
     class << self
       # When a worker is exiting, make sure we don't have any locked jobs.

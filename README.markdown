@@ -58,7 +58,7 @@ By default, it will delete failed jobs. If you want to keep failed jobs, set `De
 
 Same thing for successful jobs. They're deleted by default and, to keep them, set `Delayed::Job.destroy_successful_jobs = false`. They will be marked with finished_at. This is useful for gathering statistics like how long jobs took between entering the queue (created_at) and being finished (finished_at).
 
-You have a couble of named scopes for searching unfinished/finsihed jobs, very useful when destroy_successful_jobs is false `Delayed::Job.unfinished` and `Delayed::Job.finsihed`.
+You have several named scopes for searching unfinished/finsihed/failed jobs, very useful when destroy_successful_jobs is false `Delayed::Job.unfinished`, `Delayed::Job.finsihed`, `Delayed::Job.failed`.
 
 Here is an example of changing job parameters in Rails:
 
@@ -185,7 +185,7 @@ You can invoke `rake jobs:clear` to delete all jobs in the queue.
 
 Changes
 -------
-
+* 2.0.1: named_scope Delayed::Job.failed/finished/unfinished (jobs that have failed, have finished ok or still haven't been done)
 * 2.0.0: Contains the changes made in this fork, the ability to create workers with individual constraints without interfere to other workers
 
 * 1.7.0: Added failed_at column which can optionally be set after a certain amount of failed job attempts. By default failed job attempts are destroyed after about a month.
