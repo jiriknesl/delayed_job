@@ -108,6 +108,7 @@ module Delayed
       # Do num jobs and return stats on success/failure.
       # Exit early if interrupted.
       def work_off( options = {} )
+        ActiveRecord::Base.verify_active_connections!
         n = options[:n] || 100
         success, failure = 0, 0
 
