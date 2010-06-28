@@ -27,7 +27,7 @@ module Delayed
     attr_accessor :name
 
     # Constraints for this worker, what kind of jobs is gonna execute?
-    attr_accessor :min_priority, :max_priority, :job_types
+    attr_accessor :min_priority, :max_priority, :job_types, :only_for
 
     attr_accessor :quiet
 
@@ -41,7 +41,7 @@ module Delayed
     #   - max_priority: constraint for selecting what jobs to execute (integer)
     #   - job_types: constraint for selecting what jobs to execute (String or Array)
     def initialize(options={})
-      [ :quiet, :name, :min_priority, :max_priority, :job_types ].each do |attr_name|
+      [ :quiet, :name, :min_priority, :max_priority, :job_types, :only_for ].each do |attr_name|
         send "#{attr_name}=", options[attr_name]
       end
       # Default values
@@ -90,7 +90,8 @@ module Delayed
           :limit        => 5,
           :min_priority => min_priority,
           :max_priority => max_priority,
-          :job_types    => job_types }
+          :job_types    => job_types,
+          :only_for     => only_for }
       end
   end
 end
